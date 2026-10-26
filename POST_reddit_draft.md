@@ -22,7 +22,7 @@ Rules are simple. Only your own observation, with a date, because categories can
 
 Why bother: if your work site, or a site you're building for a client, is on that list, you want to know before you plan an agent workflow around it, not after an afternoon of clicking "Allow". And a list that many people contribute to, with dates, is the only way to see whether categories ever change.
 
-Registry and the one-minute check: <registry page link>
+Registry and the one-minute check: https://pr0t0be.github.io/claude-site-categories/
 
 If you check a site, please send the result, even if it's category0. "Normal" sites are data too. Everything is CC BY 4.0, take it and build on it.
 

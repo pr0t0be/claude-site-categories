@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+test_submission_log.json
+test_entries_to_delete.md
+candidates_form.csv
