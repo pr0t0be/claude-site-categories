@@ -1,0 +1,77 @@
+name: Report a site category
+description: Add or update a domain in the registry (what Claude in Chrome does on it)
+title: "[report] <domain>: <category>"
+labels: ["report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. One domain per issue. Only report what you saw yourself: the server response in DevTools, or the permission dialog.
+        **Never attach the Headers tab of DevTools: it contains your Claude login token. Only the Response tab.**
+        Please do not run automated scans against the Anthropic endpoint; such reports are not accepted.
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: Exactly as the server returned it in the `domain` field, or the host from the address bar. Lowercase, no https://, no path.
+      placeholder: www.example.com
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: category0 = normal site, Always allow works. category3 = prompt on every action, Always allow disabled. category1 = blocked (blocked.html). category4 = one-time copyright confirmation. category2 = blocked without a page (rare).
+      options:
+        - category0
+        - category1
+        - category2
+        - category3
+        - category4
+    validations:
+      required: true
+  - type: input
+    id: checked_at
+    attributes:
+      label: Date of observation
+      description: YYYY-MM-DD. Categories can change, so the date is required.
+      placeholder: "2026-10-25"
+    validations:
+      required: true
+  - type: dropdown
+    id: method
+    attributes:
+      label: How did you check
+      options:
+        - devtools_response (saw the url_hash_check response in the extension service worker DevTools)
+        - dialog_observed (judged by the permission dialog: Always allow present / disabled / blocked page)
+    validations:
+      required: true
+  - type: input
+    id: extension_version
+    attributes:
+      label: Claude in Chrome extension version
+      description: chrome://extensions, card of the Claude extension. Optional.
+      placeholder: "1.0.102"
+  - type: textarea
+    id: response
+    attributes:
+      label: Server response (Response tab only)
+      description: Paste the JSON from the Response tab, or attach a screenshot of the Response tab. Do NOT paste or attach the Headers tab.
+      render: json
+      placeholder: |
+        {"url": "https://www.example.com/...", "domain": "www.example.com", "category": "category3", "org_policy": null, "policy_source": null}
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything else. For example the text of the dialog, side panel mode, whether Always allow worked later.
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: This is my own observation on my own account, not an automated scan.
+          required: true
+        - label: I did not attach or paste the Headers tab (it contains my login token).
+          required: true
