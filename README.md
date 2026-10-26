@@ -77,6 +77,8 @@ You need Chrome with the Claude extension. Open the site and tell Claude in the 
 
 **Caveat: read the dialog in a clean setup.** From the extension code (version 1.0.102, not tested in every setup): in the side panel the dialog depends on the page you are on. In the small pop-up window that appears when Claude is driven from Claude Code or Claude Desktop, "Always allow" is disabled when *any tab in the Claude tab group* is category3, when the category check failed, and also while the pop-up has not got an answer yet. So a neighbouring tab of a category3 site turns every dialog in that group into a category3-looking dialog, whatever site you are visiting. Test with one tab in the Claude tab group and nothing else, or use the DevTools method below, which shows the category of the exact address.
 
+Observed on 2026-10-26 in one setup (Claude Code in auto mode driving the extension): with a category3 tab in the group, a dialog without "Always allow" appeared even for a site that is not category3; after that tab was closed, the same site and another site took clicks with no dialog at all. In auto mode only category3 (or a failed check) produces a dialog, so there a dialog with a single tab in the group already points to category3.
+
 Method in the registry: `dialog_observed` (only if the Claude tab group held no other site).
 
 ### Exactly, through DevTools, five steps
