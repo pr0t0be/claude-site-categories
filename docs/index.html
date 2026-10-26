@@ -93,7 +93,8 @@
       <p>The site does not open: the tab is sent to a <strong>blocked page</strong>. This is either category1 or a block by your organization's policy; the dialog does not say which.</p>
     </div>
   </div>
-  <p>Method name in the registry: <code>dialog_observed</code>.</p>
+  <div class="warn"><strong>Read the dialog in a clean setup.</strong> In the pop-up that appears when Claude is driven from Claude Code or Claude Desktop, "Always allow" is switched off if <em>any tab in the Claude tab group</em> is category3 (or its check failed). A neighbouring tab of a category3 site makes every dialog look like category3, whatever site you open. Keep one tab in the Claude tab group, or use the exact DevTools check below. (From the extension code, version 1.0.102.)</div>
+  <p>Method name in the registry: <code>dialog_observed</code> (only if the group held no other site).</p>
 
   <h2 id="exact">Exact check through DevTools (5 steps)</h2>
   <ol class="steps">
@@ -144,7 +145,7 @@
   <section class="ru" id="ru">
     <h2>По-русски</h2>
     <p>Открытый реестр: какой сайт в какой категории у Claude in Chrome. category0: обычный сайт, кнопка «Always allow» работает. category3: вопрос на каждое действие, «Always allow» отключена, режимы панели не помогают. category4: один раз подтверждение прав на контент. category1: сайт заблокирован. Anthropic список не публикует, здесь его собирают пользователи, каждая запись с датой и способом проверки.</p>
-    <p><strong>Проверить свой сайт за минуту:</strong> откройте сайт, попросите Claude в панели нажать любую безопасную ссылку и ничего не вводить. Окно с кнопкой «Always allow»: category0. Окно без неё с надписью «Site-level permissions are disabled for this site»: category3. Окно «By continuing, you confirm you have the right to access content on this site»: category4. Страница blocked: category1 или блок организации.</p>
+    <p><strong>Проверить свой сайт за минуту</strong> (в группе Claude должна быть одна вкладка: соседняя вкладка сайта из category3 даёт такое же окно на любом сайте)<strong>:</strong> откройте сайт, попросите Claude в панели нажать любую безопасную ссылку и ничего не вводить. Окно с кнопкой «Always allow»: category0. Окно без неё с надписью «Site-level permissions are disabled for this site»: category3. Окно «By continuing, you confirm you have the right to access content on this site»: category4. Страница blocked: category1 или блок организации.</p>
     <p><strong>Точно через DevTools:</strong> chrome://extensions, режим разработчика, ссылка «service worker» в карточке Claude, вкладка Network, фильтр <code>url_hash</code>, попросить Claude открыть сайт, строка browser_extension, вкладка Response, поле category. Вкладку Headers не открывать и не снимать: там токен входа.</p>
     <p><strong>Прислать результат:</strong> форма выше (без входа) или issue на GitHub. Правила: только своё наблюдение, дата обязательна, массового опроса API Anthropic не делаем, скриншоты Headers удаляем не читая. Подробно: <a href="https://github.com/pr0t0be/claude-site-categories/blob/main/README.ru.md">README на русском</a>.</p>
   </section>

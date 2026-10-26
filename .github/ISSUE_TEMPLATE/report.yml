@@ -44,7 +44,7 @@ body:
       label: How did you check
       options:
         - devtools_response (saw the url_hash_check response in the extension service worker DevTools)
-        - dialog_observed (judged by the permission dialog: Always allow present / disabled / blocked page)
+        - dialog_observed (judged by the permission dialog, with only this site in the Claude tab group)
     validations:
       required: true
   - type: input

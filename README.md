@@ -75,7 +75,9 @@ You need Chrome with the Claude extension. Open the site and tell Claude in the 
 | A dialog without that button, with "Site-level permissions are disabled for this site" at the bottom | category3 |
 | Once, a dialog "By continuing, you confirm you have the right to access content on this site", then normal | category4 |
 
-Method in the registry: `dialog_observed`.
+**Caveat: read the dialog in a clean setup.** From the extension code (version 1.0.102, not tested in every setup): in the side panel the dialog depends on the page you are on. In the small pop-up window that appears when Claude is driven from Claude Code or Claude Desktop, "Always allow" is disabled when *any tab in the Claude tab group* is category3, when the category check failed, and also while the pop-up has not got an answer yet. So a neighbouring tab of a category3 site turns every dialog in that group into a category3-looking dialog, whatever site you are visiting. Test with one tab in the Claude tab group and nothing else, or use the DevTools method below, which shows the category of the exact address.
+
+Method in the registry: `dialog_observed` (only if the Claude tab group held no other site).
 
 ### Exactly, through DevTools, five steps
 
@@ -113,7 +115,7 @@ Three streams, none of them touches the Anthropic endpoint by script:
 
 ## Registry rules
 
-1. Own observations only: a server response or a permission dialog, with a date. Guesses by site type ("a bank is probably category3") are not accepted.
+1. Own observations only: a server response, or a permission dialog read in a clean setup (one site in the Claude tab group), with a date. Guesses by site type ("a bank is probably category3") are not accepted.
 2. No mass automated scanning through the Anthropic endpoint, and we do not ask anyone to do it.
 3. Categories can change. That is why the date is required, and a new observation of the same domain is added as a new row; the old one stays.
 4. Screenshots of the Headers tab are deleted unread: they contain the token. Response tab or the dialog only.
