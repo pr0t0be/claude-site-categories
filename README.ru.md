@@ -95,7 +95,7 @@ _8 entries (category0: 2, category3: 6). Generated from registry.csv by validate
 
 Три двери, выбирайте самую простую:
 
-1. **Форма** на [странице реестра](https://pr0t0be.github.io/claude-site-categories/): без входа и без почты. Домен, что увидели, дата, какой продукт Claude, по желанию ссылка на скриншот, комментарий. (Тексты полей и как её собрать: [FORM_setup.md](FORM_setup.md).)
+1. **Форма** ([открыть напрямую](https://docs.google.com/forms/d/e/1FAIpQLSfi7jWeiR1db45H7FNWV712p4t1Nm3f9PebTDT6ppyLhOnq_Q/viewform) или на [странице реестра](https://pr0t0be.github.io/claude-site-categories/#send)): без входа и без почты, вопросы на английском. Домен, что увидели, дата, какой продукт Claude, по желанию ссылка на скриншот, комментарий. (Тексты полей и как её собрать: [FORM_setup.md](FORM_setup.md).)
 2. **Issue на GitHub** по шаблону «Report a site category»: для тех, у кого уже есть аккаунт GitHub.
 3. **Pull request**: строка в `registry.csv`, скриншот в `evidence/` (имя `домен_категория_ГГГГ-ММ-ДД.webp` или `.png`), затем `python validate.py` и коммит вместе с обновлёнными README и `docs/registry.csv`.
 

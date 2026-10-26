@@ -95,7 +95,7 @@ Method in the registry: `devtools_response`.
 
 Three doors, pick the easiest:
 
-1. **The form** on the [registry page](https://pr0t0be.github.io/claude-site-categories/): no sign-in, no email. Domain, what you saw, date, which Claude product, optional screenshot link, comment. (Field texts and setup: [FORM_setup.md](FORM_setup.md).)
+1. **The form** ([open it directly](https://docs.google.com/forms/d/e/1FAIpQLSfi7jWeiR1db45H7FNWV712p4t1Nm3f9PebTDT6ppyLhOnq_Q/viewform) or on the [registry page](https://pr0t0be.github.io/claude-site-categories/#send)): no sign-in, no email. Domain, what you saw, date, which Claude product, optional screenshot link, comment. (Field texts and setup: [FORM_setup.md](FORM_setup.md).)
 2. **A GitHub issue** with the "Report a site category" template: for people who already have a GitHub account.
 3. **A pull request**: a row in `registry.csv`, a screenshot in `evidence/` (named `domain_category_YYYY-MM-DD.webp` or `.png`), then `python validate.py` and commit together with the regenerated README files and `docs/registry.csv`.
 

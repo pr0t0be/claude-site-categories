@@ -51,6 +51,12 @@ Settings: "Collect email addresses" off, "Limit to 1 response" off (it requires 
 6. "Send" button, link icon, "Shorten URL", copy. This is the public form link.
 7. For the registry page: "Send", the `<>` icon, copy the HTML embed code. Put the `src` value into `docs/index.html` where `FORM_EMBED_URL` is set.
 
+## Current form (created 2026-10-26, account of the registry owner)
+
+- Public link: https://docs.google.com/forms/d/e/1FAIpQLSfi7jWeiR1db45H7FNWV712p4t1Nm3f9PebTDT6ppyLhOnq_Q/viewform
+- Embed `src`: https://docs.google.com/forms/d/e/1FAIpQLSfi7jWeiR1db45H7FNWV712p4t1Nm3f9PebTDT6ppyLhOnq_Q/viewform?embedded=true (already set in `docs/index.html`)
+- Responses sheet: linked, published to the web as CSV; the CSV link is kept by the owner, not in the repository.
+
 ## Pulling responses
 
 ```bash
