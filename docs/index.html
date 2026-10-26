@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude in Chrome site categories</title>
+<meta name="description" content="Community registry: which sites Claude in Chrome treats as prompt-on-every-action, blocked or normal. Check your site in a minute and send the result.">
+<style>
+  :root { --bg:#fff; --fg:#1b1b1b; --muted:#5c5c5c; --line:#e3e3e3; --card:#f6f6f6; --accent:#2a5bd7; --c0:#1f8a4c; --c1:#b3261e; --c2:#8a4b1f; --c3:#c26a00; --c4:#6c3fb5; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#131416; --fg:#e8e8e8; --muted:#a3a3a3; --line:#2b2d31; --card:#1c1e22; --accent:#7ea2ff; --c0:#5fcf8a; --c1:#ff7b73; --c2:#d99a6b; --c3:#ffb14d; --c4:#b79bff; } }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:1040px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-size:1.9rem; line-height:1.2; margin:0 0 8px }
+  h2 { font-size:1.35rem; margin:40px 0 12px; padding-top:8px; border-top:1px solid var(--line) }
+  h3 { font-size:1.05rem; margin:20px 0 8px }
+  p, li { max-width:72ch }
+  a { color:var(--accent) }
+  code { font:0.92em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:var(--card); padding:1px 5px; border-radius:4px }
+  pre { background:var(--card); padding:12px; border-radius:8px; overflow:auto; font-size:0.9em }
+  .lead { color:var(--muted); font-size:1.05rem; margin:0 0 16px }
+  .nav { display:flex; flex-wrap:wrap; gap:8px 16px; margin:0 0 8px; font-size:0.95rem }
+  .warn { border-left:4px solid var(--c1); background:var(--card); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0 }
+  .note { border-left:4px solid var(--accent); background:var(--card); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0 }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; margin:12px 0 }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px }
+  .card .ph { height:120px; border:1px dashed var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.85rem; margin-bottom:8px; text-align:center; padding:6px }
+  .card img { width:100%; border-radius:6px; margin-bottom:8px }
+  .tag { display:inline-block; font:600 0.8rem/1 ui-monospace,monospace; padding:4px 7px; border-radius:6px; color:#fff }
+  .tag.category0{background:var(--c0)} .tag.category1{background:var(--c1)} .tag.category2{background:var(--c2)} .tag.category3{background:var(--c3)} .tag.category4{background:var(--c4)}
+  .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0 }
+  .controls input { flex:1 1 220px; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--fg); font-size:1rem }
+  .controls button { padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--fg); cursor:pointer; font-size:0.9rem }
+  .controls button[aria-pressed="true"] { outline:2px solid var(--accent) }
+  .tablewrap { overflow:auto; border:1px solid var(--line); border-radius:10px }
+  table { border-collapse:collapse; width:100%; font-size:0.92rem }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top }
+  th { background:var(--card); position:sticky; top:0 }
+  td.notes { color:var(--muted); min-width:260px }
+  .count { color:var(--muted); font-size:0.9rem }
+  .steps li { margin-bottom:6px }
+  iframe { width:100%; min-height:900px; border:1px solid var(--line); border-radius:10px; background:#fff }
+  .ru { border-top:1px solid var(--line); margin-top:48px; padding-top:16px }
+  footer { color:var(--muted); font-size:0.85rem; margin-top:40px }
+</style>
+</head>
+<body>
+<main>
+  <h1>Claude in Chrome site categories</h1>
+  <p class="lead">A community registry of which sites Claude in Chrome treats as "prompt on every action", "blocked" or "normal". Anthropic keeps this list private. Here it is collected by users, one observation at a time, with a date and a method.</p>
+  <nav class="nav">
+    <a href="#check">Check your site in 1 minute</a>
+    <a href="#exact">Exact check (DevTools)</a>
+    <a href="#send">Send your result</a>
+    <a href="#registry">Registry</a>
+    <a href="#rules">Rules</a>
+    <a href="#ru">По-русски</a>
+    <a href="https://github.com/pr0t0be/claude-site-categories">GitHub</a>
+  </nav>
+
+  <h2 id="what">What is this about</h2>
+  <p>Before Claude in Chrome acts on a page, the extension sends the page address to an Anthropic server and gets back a category for the domain. The category decides what you see:</p>
+  <ul>
+    <li><span class="tag category0">category0</span> normal site: "Always allow" works.</li>
+    <li><span class="tag category3">category3</span> Claude asks on every action; "Always allow" is disabled; side panel modes ("Automatically approve", "Skip all approvals") do not change it.</li>
+    <li><span class="tag category4">category4</span> one-time copyright confirmation per domain, then normal.</li>
+    <li><span class="tag category1">category1</span> blocked: the tab goes to a blocked page.</li>
+    <li><span class="tag category2">category2</span> blocked without a page (purpose not described in the extension code).</li>
+  </ul>
+  <p>Source: the extension code (version 1.0.102) and server responses seen in DevTools. Details, request and response format are in the <a href="https://github.com/pr0t0be/claude-site-categories#readme">README</a>.</p>
+
+  <h2 id="check">Check your site in 1 minute (no DevTools)</h2>
+  <p>You need Chrome with the Claude extension. Open the site, then tell Claude in the side panel: <em>"Open this page and click any safe link in the menu. Do not type or submit anything."</em> Look at the first dialog Claude shows and match it below.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="ph">screenshot placeholder: dialog with an "Always allow" button<br>(docs/img/category0.png)</div>
+      <span class="tag category0">category0</span>
+      <p>A permission dialog with an <strong>"Always allow"</strong> button. Normal site. Once allowed, Claude stops asking on this domain.</p>
+    </div>
+    <div class="card">
+      <div class="ph">screenshot placeholder: dialog with only "Allow" and the line "Site-level permissions are disabled for this site"<br>(docs/img/category3.png)</div>
+      <span class="tag category3">category3</span>
+      <p>Only a one-time allow button, and at the bottom: <strong>"Site-level permissions are disabled for this site"</strong>. Claude will ask on every action; in the site list the hint says "You must approve any Claude action on this site".</p>
+    </div>
+    <div class="card">
+      <div class="ph">screenshot placeholder: copyright confirmation dialog<br>(docs/img/category4.png)</div>
+      <span class="tag category4">category4</span>
+      <p>A dialog saying <strong>"By continuing, you confirm you have the right to access content on this site"</strong>. Shown once per domain, then the site behaves as normal.</p>
+    </div>
+    <div class="card">
+      <div class="ph">screenshot placeholder: blocked page<br>(docs/img/category1.png)</div>
+      <span class="tag category1">category1</span>
+      <p>The site does not open: the tab is sent to a <strong>blocked page</strong>. This is either category1 or a block by your organization's policy; the dialog does not say which.</p>
+    </div>
+  </div>
+  <p>Method name in the registry: <code>dialog_observed</code>.</p>
+
+  <h2 id="exact">Exact check through DevTools (5 steps)</h2>
+  <ol class="steps">
+    <li>In Chrome open <code>chrome://extensions</code> and turn on <strong>Developer mode</strong> (top right).</li>
+    <li>On the Claude extension card click the small <strong>"service worker"</strong> link under the description. DevTools opens.</li>
+    <li>Open the <strong>Network</strong> tab and type <code>url_hash</code> into the filter field.</li>
+    <li>In the Claude side panel ask it to open the site.</li>
+    <li>A row named <code>browser_extension</code> appears. Click it, open the <strong>Response</strong> tab: the <code>category</code> field is there, next to <code>domain</code>.</li>
+  </ol>
+  <p>No row? The answer is cached for 5 minutes. Ask Claude to open another page of the same site.</p>
+  <div class="warn"><strong>Warning.</strong> The <strong>Headers</strong> tab next to Response shows your Claude login token. Look at Response only. Never share a screenshot of Headers. The registry deletes such screenshots unread.</div>
+  <p>Method name in the registry: <code>devtools_response</code>.</p>
+
+  <h2 id="send">Send your result</h2>
+  <p>One form, no sign-in, no email. Domain, what you saw, date, which Claude product, optional screenshot link, comment. A person reviews every report before it appears in the table. "Normal" sites (category0) are welcome too: they are data.</p>
+  <div id="form-slot"></div>
+  <p>Developers can instead open a <a href="https://github.com/pr0t0be/claude-site-categories/issues/new?template=report.yml">GitHub issue with the report template</a> or send a pull request with a row in <code>registry.csv</code>.</p>
+
+  <h2 id="registry">Registry</h2>
+  <div class="controls">
+    <input id="q" type="search" placeholder="filter by domain, reporter, notes" aria-label="filter">
+    <button data-cat="" aria-pressed="true">all</button>
+    <button data-cat="category0">category0</button>
+    <button data-cat="category3">category3</button>
+    <button data-cat="category4">category4</button>
+    <button data-cat="category1">category1</button>
+    <button data-cat="category2">category2</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="tablewrap">
+    <table id="t">
+      <thead><tr><th>domain</th><th>category</th><th>date</th><th>method</th><th>reporter</th><th>source</th><th>notes</th></tr></thead>
+      <tbody><tr><td colspan="7">Loading registry.csv…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="count">Reliability, highest first: <code>devtools_response</code> (server response seen) &gt; <code>dialog_observed</code> (judged by the dialog) &gt; <code>third_party_report</code> (someone else's public report, not confirmed by Anthropic). Raw data: <a href="https://github.com/pr0t0be/claude-site-categories/blob/main/registry.csv">registry.csv</a>.</p>
+
+  <h2 id="rules">Rules</h2>
+  <ul>
+    <li><strong>Own observations only</strong>: a server response or a permission dialog, with a date. Guesses by site type are not accepted.</li>
+    <li><strong>Date is required</strong>: categories can change. A new observation of a domain is a new row; old rows stay, so the history is visible.</li>
+    <li><strong>No mass automated scanning</strong> of the Anthropic endpoint, and we do not ask anyone to do it. It is an undocumented API behind a personal login token; rows produced by a script over a domain list are not accepted.</li>
+    <li><strong>Headers screenshots are deleted unread</strong>: they contain the token. Response tab or the dialog only.</li>
+    <li>Domains are recorded as the server returns them (<code>www.example.com</code>, not <code>example.com</code>); subdomains get their own rows.</li>
+  </ul>
+  <p>Data: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Code: MIT. This registry is not affiliated with Anthropic.</p>
+
+  <section class="ru" id="ru">
+    <h2>По-русски</h2>
+    <p>Открытый реестр: какой сайт в какой категории у Claude in Chrome. category0: обычный сайт, кнопка «Always allow» работает. category3: вопрос на каждое действие, «Always allow» отключена, режимы панели не помогают. category4: один раз подтверждение прав на контент. category1: сайт заблокирован. Anthropic список не публикует, здесь его собирают пользователи, каждая запись с датой и способом проверки.</p>
+    <p><strong>Проверить свой сайт за минуту:</strong> откройте сайт, попросите Claude в панели нажать любую безопасную ссылку и ничего не вводить. Окно с кнопкой «Always allow»: category0. Окно без неё с надписью «Site-level permissions are disabled for this site»: category3. Окно «By continuing, you confirm you have the right to access content on this site»: category4. Страница blocked: category1 или блок организации.</p>
+    <p><strong>Точно через DevTools:</strong> chrome://extensions, режим разработчика, ссылка «service worker» в карточке Claude, вкладка Network, фильтр <code>url_hash</code>, попросить Claude открыть сайт, строка browser_extension, вкладка Response, поле category. Вкладку Headers не открывать и не снимать: там токен входа.</p>
+    <p><strong>Прислать результат:</strong> форма выше (без входа) или issue на GitHub. Правила: только своё наблюдение, дата обязательна, массового опроса API Anthropic не делаем, скриншоты Headers удаляем не читая. Подробно: <a href="https://github.com/pr0t0be/claude-site-categories/blob/main/README.ru.md">README на русском</a>.</p>
+  </section>
+
+  <footer>Built from <code>registry.csv</code> in the repository. If the table does not load, open the CSV on GitHub.</footer>
+</main>
+
+<script>
+(function () {
+  // Set after the Google Form is created (FORM_setup.md): the "src" of the form's embed code.
+  var FORM_EMBED_URL = "";
+  var FORM_LINK = "";
+  var slot = document.getElementById("form-slot");
+  if (FORM_EMBED_URL) {
+    var f = document.createElement("iframe");
+    f.src = FORM_EMBED_URL; f.title = "Report form"; f.loading = "lazy";
+    slot.appendChild(f);
+    if (FORM_LINK) { var p = document.createElement("p"); p.innerHTML = 'Form does not show? <a href="' + FORM_LINK + '">Open it in a new tab</a>.'; slot.appendChild(p); }
+  } else {
+    slot.innerHTML = '<div class="note">The report form is not connected yet. Until then, use the GitHub issue template below.</div>';
+  }
+
+  var SOURCES = ["registry.csv", "https://raw.githubusercontent.com/pr0t0be/claude-site-categories/main/registry.csv"];
+  var rows = [], cat = "", q = "";
+
+  function parseCSV(text) {
+    var out = [], row = [], field = "", inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else { inQ = false; } }
+        else field += c;
+      } else if (c === '"') inQ = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(field); out.push(row); row = []; field = ""; }
+      else field += c;
+    }
+    if (field.length || row.length) { row.push(field); out.push(row); }
+    var head = out.shift();
+    return out.filter(function (r) { return r.length === head.length; }).map(function (r) {
+      var o = {}; head.forEach(function (h, j) { o[h] = r[j]; }); return o;
+    });
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function sourceCell(s) {
+    s = (s || "").trim();
+    if (/^https?:\/\//.test(s)) { var label = s.replace(/^https?:\/\//, ""); if (label.length > 50) label = label.slice(0, 47) + "..."; return '<a href="' + esc(s) + '">' + esc(label) + "</a>"; }
+    if (s.indexOf("evidence/") === 0) return '<a href="https://github.com/pr0t0be/claude-site-categories/blob/main/' + esc(s) + '">' + esc(s.slice(9)) + "</a>";
+    return esc(s);
+  }
+  function render() {
+    var tb = document.querySelector("#t tbody"), ql = q.toLowerCase();
+    var shown = rows.filter(function (r) {
+      if (cat && r.category !== cat) return false;
+      if (!ql) return true;
+      return (r.domain + " " + r.reporter + " " + r.notes + " " + r.method).toLowerCase().indexOf(ql) >= 0;
+    });
+    shown.sort(function (a, b) { return a.category < b.category ? -1 : a.category > b.category ? 1 : a.domain < b.domain ? -1 : a.domain > b.domain ? 1 : a.checked_at < b.checked_at ? 1 : -1; });
+    tb.innerHTML = shown.length ? shown.map(function (r) {
+      return "<tr><td><code>" + esc(r.domain) + "</code></td><td><span class=\"tag " + esc(r.category) + "\">" + esc(r.category) + "</span></td><td>" + esc(r.checked_at) + "</td><td>" + esc(r.method) + "</td><td>" + esc(r.reporter) + "</td><td>" + sourceCell(r.source) + "</td><td class=\"notes\">" + esc(r.notes) + "</td></tr>";
+    }).join("") : '<tr><td colspan="7">Nothing matches.</td></tr>';
+    var counts = {}; rows.forEach(function (r) { counts[r.category] = (counts[r.category] || 0) + 1; });
+    document.getElementById("count").textContent = shown.length + " of " + rows.length + " rows (" + Object.keys(counts).sort().map(function (k) { return k + ": " + counts[k]; }).join(", ") + ")";
+  }
+  function load(i) {
+    if (i >= SOURCES.length) { document.querySelector("#t tbody").innerHTML = '<tr><td colspan="7">Could not load registry.csv. Open it on GitHub.</td></tr>'; return; }
+    fetch(SOURCES[i], { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (t) { rows = parseCSV(t); render(); })
+      .catch(function () { load(i + 1); });
+  }
+  document.getElementById("q").addEventListener("input", function (e) { q = e.target.value; render(); });
+  Array.prototype.forEach.call(document.querySelectorAll(".controls button"), function (b) {
+    b.addEventListener("click", function () {
+      cat = b.getAttribute("data-cat");
+      Array.prototype.forEach.call(document.querySelectorAll(".controls button"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render();
+    });
+  });
+  load(0);
+})();
+</script>
+</body>
+</html>

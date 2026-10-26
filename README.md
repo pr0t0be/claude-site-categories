@@ -1,37 +1,37 @@
-# Реестр категорий сайтов для Claude in Chrome
+# Site category registry for Claude in Chrome
 
-[English version](README.en.md)
+[Русская версия](README.ru.md) · [Registry page with the one-minute check](https://pr0t0be.github.io/claude-site-categories/) · [Report a site](#how-to-send-a-result)
 
-Открытый список: какой сайт в какой категории у Claude in Chrome (расширение Anthropic для Chrome). Категория определяет, как Claude ведёт себя на сайте: обычный сайт с кнопкой «Always allow», вопрос на каждое действие без возможности разрешить навсегда, или полная блокировка. Anthropic этот список не публикует. Здесь его собирают пользователи по своим наблюдениям, каждая строка с датой и способом проверки.
+A public list of which site is in which category for Claude in Chrome (Anthropic's Chrome extension). The category decides how Claude behaves on a site: a normal site with an "Always allow" button, a prompt on every action with no way to allow the site permanently, or a full block. Anthropic does not publish this list. Here users collect it from their own observations, every row with a date and a method.
 
-Реестр ведётся как пинг: открыли сайт, расширение спросило сервер Anthropic, сервер ответил категорией, ответ записали.
+The registry works like a ping: you open a site, the extension asks the Anthropic server, the server answers with a category, the answer gets recorded.
 
-## Зачем
+## Why
 
-Перед действием на сайте расширение отправляет адрес страницы на сервер Anthropic и получает категорию. На сайтах категории category3 Claude спрашивает подтверждение на каждый клик, кнопка «Always allow» отключена, и режимы боковой панели («Automatically approve», «Skip all approvals») этого не меняют. Узнаёшь об этом только когда упёрся. Список позволяет узнать заранее, что ждёт на рабочем сайте или на сайте, который делаете для клиента.
+Before acting on a site the extension sends the page URL to an Anthropic server and gets a category back. On category3 sites Claude asks for confirmation on every click, the "Always allow" button is disabled, and the side panel modes ("Automatically approve", "Skip all approvals") do not change that. You only find out when you hit the wall. The list lets you know in advance what to expect on your work site or on a site you build for a client.
 
-## Как устроена проверка у Anthropic
+## How the check works on Anthropic's side
 
-По коду расширения Claude in Chrome версии 1.0.102 (файлы `assets/mcpPermissions-*.js` и `assets/sidepanel-*.js`, разбор 25.10.2026):
+From the code of the Claude in Chrome extension version 1.0.102 (files `assets/mcpPermissions-*.js` and `assets/sidepanel-*.js`, reviewed 2026-10-25):
 
-- Запрос: `POST https://api.anthropic.com/api/web/url_hash_check/browser_extension`, заголовок `Authorization: Bearer <токен входа>`, тело `{"url": "<адрес страницы>", "max_supported_category": 4}`.
-- Ответ: `{"url": ..., "domain": ..., "category": ..., "org_policy": ..., "policy_source": ...}`. Поле `domain` показывает, что категория даётся на домен, а не на страницу.
-- Кеш 5 минут на адрес (`CACHE_TTL_MS = 3e5`). Запрос уходит из служебного процесса (service worker) расширения, не со страницы.
-- Списка сайтов в коде расширения нет. Категорию присылает сервер. Критерии Anthropic не публикует; в справке сказано только, что есть сайты, на которых Claude требует подтверждения на каждое действие, и что Claude спрашивает разрешение перед финансовыми сайтами.
+- Request: `POST https://api.anthropic.com/api/web/url_hash_check/browser_extension`, header `Authorization: Bearer <login token>`, body `{"url": "<page url>", "max_supported_category": 4}`.
+- Response: `{"url": ..., "domain": ..., "category": ..., "org_policy": ..., "policy_source": ...}`. The `domain` field shows the category is assigned per domain, not per page.
+- Cache: 5 minutes per URL (`CACHE_TTL_MS = 3e5`). The request is sent from the extension service worker, not from the page.
+- There is no site list inside the extension. The category comes from the server. Anthropic does not publish the criteria; the help center only says there are some websites on which Claude requires approval for every action, and that Claude asks for permission before accessing financial sites.
 
-| Категория | Что делает расширение |
+| Category | What the extension does |
 |---|---|
-| category0 | обычный сайт, «Always allow» работает |
-| category4 | сайт с чужим контентом: один раз на домен окно «By continuing, you confirm you have the right to access content on this site», после подтверждения как обычный |
-| category3 | вопрос на каждое действие: подсказка «You must approve any Claude action on this site», в окне разрешения надпись «Site-level permissions are disabled for this site», кнопка «Always allow» отключена |
-| category2 | заблокирован без страницы blocked.html; назначение в коде не описано |
-| category1 | заблокирован совсем, вкладка переводится на blocked.html |
+| category0 | normal site, "Always allow" works |
+| category4 | third-party content site: once per domain a dialog "By continuing, you confirm you have the right to access content on this site", then it behaves as normal |
+| category3 | prompt on every action: hint "You must approve any Claude action on this site", the permission dialog says "Site-level permissions are disabled for this site", the "Always allow" button is disabled |
+| category2 | blocked without the blocked.html page; purpose not described in the code |
+| category1 | fully blocked, the tab is redirected to blocked.html |
 
-Служебные значения, которые сервер не присылает, а расширение выставляет само: `category_unknown_error` (категорию получить не удалось, расширение блокирует «as a precaution») и `category_org_blocked` (сервер вернул `org_policy: "block"` или политика организации в Chrome). В реестр они не вносятся.
+Internal values the server does not send and the extension sets itself: `category_unknown_error` (the category could not be fetched, the extension blocks "as a precaution") and `category_org_blocked` (the server returned `org_policy: "block"` or a Chrome enterprise policy applies). They are not recorded in the registry.
 
-Порядок по строгости в коде: category0 < category4 < category3 < category_unknown_error < category2 = category_org_blocked < category1.
+Severity order in the code: category0 < category4 < category3 < category_unknown_error < category2 = category_org_blocked < category1.
 
-## Реестр
+## Registry
 
 <!-- registry:start -->
 _8 entries (category0: 2, category3: 6). Generated from registry.csv by validate.py, do not edit by hand._
@@ -48,80 +48,110 @@ _8 entries (category0: 2, category3: 6). Generated from registry.csv by validate
 | www.avito.ru | category3 | 2026-10-25 | devtools_response | pr0t0be | [www.avito.ru_category3_2026-10-25.webp](evidence/www.avito.ru_category3_2026-10-25.webp) | Response tab of url_hash_check in the extension service worker DevTools; org_policy null, policy_source null; extension 1.0.102 |
 <!-- registry:end -->
 
-Исходник: [registry.csv](registry.csv). Таблица выше собирается из него скриптом `python validate.py`.
+Source of truth: [registry.csv](registry.csv). The table above and the [registry page](https://pr0t0be.github.io/claude-site-categories/) are generated from it by `python validate.py`.
 
-Колонки:
+Columns:
 
-- `domain`: домен из поля `domain` ответа сервера, либо хост из адресной строки. Строчными буквами, без `https://` и пути.
-- `category`: category0, category1, category2, category3 или category4.
-- `checked_at`: дата наблюдения, ГГГГ-ММ-ДД. Обязательна: категория может измениться.
-- `method`: как проверено. `devtools_response`: ответ сервера увиден в DevTools. `dialog_observed`: вывод по окну разрешения (есть или нет «Always allow», есть ли страница blocked). `third_party_report`: пересказ чужого публичного сообщения (issue, статья), категория выведена из описания.
-- `reporter`: кто наблюдал (логин GitHub) или откуда пересказ.
-- `source`: ссылка на issue, статью или файл в папке `evidence/` (скриншот только вкладки Response).
-- `notes`: что ещё важно: текст окна, версия расширения, оговорки.
+- `domain`: the `domain` field of the server response, or the host from the address bar. Lowercase, no `https://`, no path.
+- `category`: category0, category1, category2, category3 or category4.
+- `checked_at`: date of the observation, YYYY-MM-DD. Required: categories can change.
+- `method`: how it was checked. `devtools_response`: the server response was seen in DevTools. `dialog_observed`: judged by the permission dialog ("Always allow" present or not, blocked page or not). `third_party_report`: a public report by someone else (issue, article), category inferred from their description.
+- `reporter`: who observed it (GitHub login, `form` for form reports) or where the report comes from.
+- `source`: link to an issue, an article, or a file in `evidence/` (screenshot of the Response tab or of the dialog only).
+- `notes`: anything else that matters: dialog text, extension version, Claude product (extension or Desktop built-in browser), caveats.
 
-Надёжность по убыванию: `devtools_response` > `dialog_observed` > `third_party_report`. Строка с `third_party_report` это не наблюдение участников реестра, а ссылка на чужое сообщение; Anthropic такие сообщения не подтверждала.
+Reliability, highest first: `devtools_response` > `dialog_observed` > `third_party_report`. A `third_party_report` row is not an observation by registry contributors, it is a pointer to someone else's public report; Anthropic has not confirmed such reports.
 
-## Как проверить свой сайт
+## How to check your site
 
-### За минуту, по виду окна
+### In a minute, by the dialog
 
-Нужен Chrome с расширением Claude. Откройте сайт, в панели Claude напишите: «Открой эту страницу и нажми любую безопасную ссылку в меню. Ничего не вводи и не отправляй». Смотрите на первое окно:
+You need Chrome with the Claude extension. Open the site and tell Claude in the side panel: "Open this page and click any safe link in the menu. Do not type or submit anything." Look at the first dialog:
 
-| Что увидели | Категория |
+| What you see | Category |
 |---|---|
-| Страница blocked, сайт не открылся | category1 |
-| Окно с кнопкой «Always allow» | category0 |
-| Окно без этой кнопки, внизу «Site-level permissions are disabled for this site» | category3 |
-| Один раз окно «By continuing, you confirm you have the right to access content on this site», дальше как обычный | category4 |
+| A blocked page, the site did not open | category1 (or a block by your organization's policy) |
+| A dialog with an "Always allow" button | category0 |
+| A dialog without that button, with "Site-level permissions are disabled for this site" at the bottom | category3 |
+| Once, a dialog "By continuing, you confirm you have the right to access content on this site", then normal | category4 |
 
-Способ в реестре: `dialog_observed`.
+Method in the registry: `dialog_observed`.
 
-### Точно, через DevTools, пять шагов
+### Exactly, through DevTools, five steps
 
-1. В Chrome откройте `chrome://extensions` и справа вверху включите «Режим разработчика».
-2. В карточке расширения Claude нажмите ссылку «service worker» (мелкая, под описанием расширения). Откроются инструменты разработчика.
-3. Перейдите на вкладку Network и в поле фильтра введите `url_hash`.
-4. В панели Claude попросите открыть нужный сайт.
-5. В списке появится строка `browser_extension`. Нажмите на неё и откройте вкладку Response: там поле `category`.
+1. In Chrome open `chrome://extensions` and turn on "Developer mode" in the top right.
+2. On the Claude extension card click the "service worker" link (small, under the extension description). DevTools opens.
+3. Go to the Network tab and type `url_hash` into the filter field.
+4. In the Claude side panel ask it to open the site you want to check.
+5. A `browser_extension` row appears. Click it and open the Response tab: the `category` field is there.
 
-Если строки нет, ответ лежит в кеше 5 минут: попросите открыть другую страницу того же сайта.
+If there is no row, the response is cached for 5 minutes: ask Claude to open another page of the same site.
 
-**Предупреждение.** Во вкладке Headers рядом виден ваш токен входа в аккаунт Claude. Смотрите только Response. Скриншоты Headers не присылайте никому, в реестр они не принимаются.
+**Warning.** The Headers tab next to it shows your Claude login token. Look at Response only. Never send anyone a screenshot of Headers; the registry deletes them unread.
 
-Способ в реестре: `devtools_response`.
+Method in the registry: `devtools_response`.
 
-## Как прислать результат
+## How to send a result
 
-Два пути:
+Three doors, pick the easiest:
 
-1. Issue по шаблону «Report a site category»: домен, категория, дата, способ, при желании JSON ответа или скриншот вкладки Response.
-2. Pull request: строка в `registry.csv`, скриншот в `evidence/` (имя `домен_категория_ГГГГ-ММ-ДД.webp` или `.png`), затем `python validate.py` и коммит вместе с обновлённым README.
+1. **The form** on the [registry page](https://pr0t0be.github.io/claude-site-categories/): no sign-in, no email. Domain, what you saw, date, which Claude product, optional screenshot link, comment. (Field texts and setup: [FORM_setup.md](FORM_setup.md).)
+2. **A GitHub issue** with the "Report a site category" template: for people who already have a GitHub account.
+3. **A pull request**: a row in `registry.csv`, a screenshot in `evidence/` (named `domain_category_YYYY-MM-DD.webp` or `.png`), then `python validate.py` and commit together with the regenerated README files and `docs/registry.csv`.
 
-Подробнее в [CONTRIBUTING.md](CONTRIBUTING.md).
+Every report is reviewed by a person before it lands in `registry.csv`. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Правила реестра
+## How the registry grows
 
-1. Только собственное наблюдение: ответ сервера или окно разрешения, с датой. Домысел по типу сайта («наверное, банк в category3») не принимается.
-2. Массовое автоматическое сканирование через эндпоинт Anthropic не делаем и не просим. Это недокументированный API под личным токеном входа: риск для аккаунта и для условий использования. Записи, полученные скриптом по списку доменов, не принимаются.
-3. Категория может меняться. Поэтому дата обязательна, а новое наблюдение того же домена добавляется отдельной строкой, старая не удаляется.
-4. Скриншоты вкладки Headers не принимаются: там токен. Только Response.
-5. Домен записывается как в ответе сервера (`www.avito.ru`, а не `avito.ru`), поддомены отдельными строками.
-6. Чужие публичные сообщения можно вносить как `third_party_report` со ссылкой, но без дорисовки деталей: только то, что написано в источнике.
+Three streams, none of them touches the Anthropic endpoint by script:
 
-## Чего реестр не знает
+- **Reports from people** (form, issues, pull requests): the main stream. Form responses are pulled into `candidates_form.csv` by `python import_form.py --url <published CSV link>` and reviewed by hand.
+- **GitHub radar**: `python radar_github.py` searches public issues in `anthropics/claude-code` for the phrases that accompany this behaviour ("Site-level permissions are disabled", "category3", "url_hash_check", "per-action approval"), pulls out the domains mentioned near them with a 200-character quote, and writes `candidates_github.csv` plus the list of matched issues in `candidates_github_issues.csv`. Only GitHub is queried; the `gh` CLI is used when present, otherwise plain unauthenticated REST. Candidates are reviewed by a person and, when the source really states the observation, added as `third_party_report`. Run it by hand or once a day from a scheduler; no secrets are involved.
+- **Manual check sessions**: a person works with Claude in Chrome as usual with the service worker DevTools open and records the exact server response for a list of sites. The first list of 20 sites and the step-by-step routine are in [CHECKLIST_manual.md](CHECKLIST_manual.md) (in Russian, the list is for the Russian-speaking audience the registry started with). Repeat monthly: categories can change.
 
-- Критерии, по которым Anthropic относит сайт к категории. Не опубликованы.
-- Полный список. Здесь только то, что кто-то проверил.
-- Проверяет ли встроенный браузер приложения Claude Desktop категории тем же запросом. По документации Anthropic он сверяется с тем же списком безопасности сайтов, но ответ сервера для него никто из участников не видел.
-- Можно ли подать заявку на пересмотр категории. В документации не описано.
+**What we do not do:** mass automated querying of `url_hash_check`. It is an undocumented endpoint behind a personal login token; scanning a domain list through it risks the account and the terms of use, and rows produced that way are not accepted.
 
-## Ссылки
+## Registry rules
 
-- Справка Anthropic по разрешениям Claude in Chrome: https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide
-- Справка «Use Claude in Chrome safely»: https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely
-- Браузер в Claude Desktop для организаций, раздел Site safety check: https://claude.com/docs/third-party/claude-desktop/browser.md
-- Claude Code с Chrome: https://code.claude.com/docs/en/chrome.md
-- Обращения пользователей в репозитории Claude Code: [99007](https://github.com/anthropics/claude-code/issues/99007), [94880](https://github.com/anthropics/claude-code/issues/94880), [91495](https://github.com/anthropics/claude-code/issues/91495), [93201](https://github.com/anthropics/claude-code/issues/93201)
+1. Own observations only: a server response or a permission dialog, with a date. Guesses by site type ("a bank is probably category3") are not accepted.
+2. No mass automated scanning through the Anthropic endpoint, and we do not ask anyone to do it.
+3. Categories can change. That is why the date is required, and a new observation of the same domain is added as a new row; the old one stays.
+4. Screenshots of the Headers tab are deleted unread: they contain the token. Response tab or the dialog only.
+5. The domain is recorded as the server returns it (`www.avito.ru`, not `avito.ru`); subdomains get their own rows.
+6. Public reports by others may be added as `third_party_report` with a link, without adding details: only what the source says.
 
-Реестр не связан с Anthropic. Названия Claude и Anthropic принадлежат их владельцу.
+## Files
+
+| File | What it is |
+|---|---|
+| `registry.csv` | the registry, source of truth |
+| `validate.py` | checks the CSV, rebuilds the README tables, copies the CSV into `docs/`; `--check` in CI |
+| `docs/index.html` | the registry page for GitHub Pages (enable Pages from the `docs/` folder on `main`) |
+| `radar_github.py` | GitHub issues radar, writes `candidates_github.csv` and `candidates_github_issues.csv` |
+| `import_form.py` | pulls form responses into `candidates_form.csv` |
+| `FORM_setup.md` | form fields and a 5-minute setup guide |
+| `CHECKLIST_manual.md` | manual check session routine and the first 20 sites |
+| `CONTRIBUTING.md` | how to add a row |
+| `evidence/` | screenshots of the Response tab or dialogs, never Headers |
+| `POST_reddit_draft.md` | announcement draft |
+
+## What the registry does not know
+
+- The criteria Anthropic uses to assign categories. Not published.
+- The full list. Only what someone has checked is here.
+- Whether the built-in browser of the Claude Desktop app checks categories with the same request. Anthropic's documentation says it consults the same site safety list, but no contributor has seen its server response.
+- Whether a category review can be requested. Not described in the documentation.
+
+## Licenses
+
+Data (`registry.csv`, `candidates_*.csv`, `evidence/`): [CC BY 4.0](LICENSE-DATA.md). Code: [MIT](LICENSE).
+
+## Links
+
+- Claude in Chrome permissions guide: https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide
+- Use Claude in Chrome safely: https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely
+- Browser in Claude Desktop for organizations, Site safety check: https://claude.com/docs/third-party/claude-desktop/browser.md
+- Claude Code with Chrome: https://code.claude.com/docs/en/chrome.md
+- User reports in the Claude Code repository: [99007](https://github.com/anthropics/claude-code/issues/99007), [94880](https://github.com/anthropics/claude-code/issues/94880), [91495](https://github.com/anthropics/claude-code/issues/91495), [93201](https://github.com/anthropics/claude-code/issues/93201), [101684](https://github.com/anthropics/claude-code/issues/101684), [104074](https://github.com/anthropics/claude-code/issues/104074)
+
+This registry is not affiliated with Anthropic. Claude and Anthropic are trademarks of their owner.

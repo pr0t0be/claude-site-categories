@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Validate registry.csv and rebuild the registry tables in README.md and README.en.md.
+"""Validate registry.csv, rebuild the registry tables in README.md and README.ru.md,
+and copy registry.csv into docs/ for the GitHub Pages table.
 
 Usage:
     python validate.py          # validate CSV and rewrite the README tables
@@ -18,7 +19,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CSV_PATH = ROOT / "registry.csv"
-README_FILES = [ROOT / "README.md", ROOT / "README.en.md"]
+README_FILES = [ROOT / "README.md", ROOT / "README.ru.md"]
+DOCS_CSV = ROOT / "docs" / "registry.csv"  # copy served by GitHub Pages
 
 COLUMNS = ["domain", "category", "checked_at", "method", "reporter", "source", "notes"]
 CATEGORIES = {"category0", "category1", "category2", "category3", "category4"}
@@ -142,6 +144,18 @@ def update_readme(path: Path, table: str, check: bool) -> bool:
     return True
 
 
+def sync_docs_csv(check: bool) -> bool:
+    src = CSV_PATH.read_bytes()
+    if DOCS_CSV.exists() and DOCS_CSV.read_bytes() == src:
+        return False
+    if check:
+        print("ERROR: docs/registry.csv is stale; run: python validate.py", file=sys.stderr)
+        sys.exit(1)
+    DOCS_CSV.parent.mkdir(exist_ok=True)
+    DOCS_CSV.write_bytes(src)
+    return True
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--check", action="store_true", help="do not write; fail if the README tables are stale")
@@ -149,6 +163,8 @@ def main() -> None:
     rows = load_rows()
     table = build_table(rows)
     changed = [p.name for p in README_FILES if update_readme(p, table, args.check)]
+    if sync_docs_csv(args.check):
+        changed.append("docs/registry.csv")
     print(f"OK: {len(rows)} rows valid")
     if changed:
         print("Updated: " + ", ".join(changed))

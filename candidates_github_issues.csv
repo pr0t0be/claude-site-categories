@@ -1,0 +1,83 @@
+issue_url,issue_date,title,domains_found
+https://github.com/anthropics/claude-code/issues/104074,2026-10-21,"Built-in browser asks to approve every action on a site that's in Allowed sites (""Site-level permissions are disabled for this site"")",0
+https://github.com/anthropics/claude-code/issues/103180,2026-10-18,"[Bug] Claude Code ignores user instructions, overrides decisions, and completes no requested work",0
+https://github.com/anthropics/claude-code/issues/103011,2026-10-17,Browser pane approval cards in Projects threads cannot be seen or reached,0
+https://github.com/anthropics/claude-code/issues/102000,2026-10-14,"Built-in browser: no ""Always allow"" for actions on private-network hosts; every click asks for approval (contradicts docs)",0
+https://github.com/anthropics/claude-code/issues/101684,2026-10-13,"Browser ""Allowed sites"" allowlist ignored — allowlisted site still prompts on every action (""Site-level permissions are disabled for this site"")",0
+https://github.com/anthropics/claude-code/issues/99782,2026-10-05,[BUG] --chrome integration stops registering browser tools after simultaneous update of CLI (2.1.175→2.1.289) and extension (1.0.94→1.0.98),0
+https://github.com/anthropics/claude-code/issues/99007,2026-10-02,[Feature Request] Claude in Chrome: Allow persistent approvals for category3 sites (force-prompt domains),4
+https://github.com/anthropics/claude-code/issues/97741,2026-09-28,"Auto-mode classifier keeps refusing browser actions after the user switches the session to Manual mode, and ignores explicit user approval",0
+https://github.com/anthropics/claude-code/issues/96717,2026-09-24,"[BUG] Browser pane: the private-network read grant does not cover find, zoom, scroll, hover and read_console_messages, although the app files them as read requests",0
+https://github.com/anthropics/claude-code/issues/96400,2026-09-23,"[BUG] Built-in browser: the per-site permission card has no working persistent grant, and in third-party deployments it cannot be skipped at all",0
+https://github.com/anthropics/claude-code/issues/96096,2026-09-22,"[BUG] Claude in Chrome tools prompt on every call in Bypass mode; ""Always allow"" ignored (regression in 2.1.280, desktop Code tab, Windows)",0
+https://github.com/anthropics/claude-code/issues/95856,2026-09-21,"[BUG] Claude in Chrome (from Claude Desktop): every domain except docs.google.com denied, no approval popup, server returns ""allow""",7
+https://github.com/anthropics/claude-code/issues/95539,2026-09-19,[BUG] All naver.com domains blocked by default safety restrictions — false positive on Korea's primary portal (daum.net / tistory.com not blocked),15
+https://github.com/anthropics/claude-code/issues/95326,2026-09-18,"[BUG] [Claude in Chrome] All tools blocked on reddit.com (and redd.it) with ""not allowed due to safety restrictions"" since 2026-09-18 — worked through 2026-09-17",19
+https://github.com/anthropics/claude-code/issues/94726,2026-09-16,[MODEL] Auto-mode credential classifier blocks a previously-working SQL connection with no config change,0
+https://github.com/anthropics/claude-code/issues/94830,2026-09-16,Desktop built-in browser can't grant standing permissions for .local hosts (WordPress Studio sites),0
+https://github.com/anthropics/claude-code/issues/94880,2026-09-16,"Claude for Chrome: site-level permissions unavailable for some domains, with no way to grant them",2
+https://github.com/anthropics/claude-code/issues/93655,2026-09-11,"Browser pane per-action origin permission prompt has no ""Allow always"" option, ignores settings.json/bypassPermissions",0
+https://github.com/anthropics/claude-code/issues/93480,2026-09-10,Allow session archive/pin/move actions to be permission-scoped (not per-call approval),0
+https://github.com/anthropics/claude-code/issues/93156,2026-09-09,"Browser pane: no way to grant persistent site permission — per-action prompts persist despite launchPreviewAllowedOrigins, tool allowlist, and bypassPermissions",0
+https://github.com/anthropics/claude-code/issues/93201,2026-09-09,"[BUG] Built-in browser ignores Allowed sites for internal hostnames (*.habifino.local): ""Site-level permissions are disabled for this site"", prompt on every action",4
+https://github.com/anthropics/claude-code/issues/92571,2026-09-07,Claude in Chrome: site-approval prompt never fires for Claude Code MCP channel — every site permanently blocked (side-panel approvals don't propagate),2
+https://github.com/anthropics/claude-code/issues/92698,2026-09-07,"[FEATURE] Desktop browser preview: auto-allow RFC 6761 reserved TLDs (*.test) that resolve to loopback, like *.localhost",0
+https://github.com/anthropics/claude-code/issues/92195,2026-09-04,[BUG] Browser pane per-action permission prompts never persist for non-localhost origins,7
+https://github.com/anthropics/claude-code/issues/91495,2026-09-02,"[BUG] Site permissions (""Allow all websites"") ignored by the built-in browser in Claude Code Desktop",3
+https://github.com/anthropics/claude-code/issues/90928,2026-08-31,"Claude in Chrome: Japanese job-board domains (job.mynavi.jp, tenshoku.mynavi.jp) blocked with 'Navigation to this domain is not allowed' — likely category misclassification",3
+https://github.com/anthropics/claude-code/issues/90305,2026-08-28,"[FEATURE] Browser pane: allow a persistent grant for interaction on an approved private-network host, not just for reading",0
+https://github.com/anthropics/claude-code/issues/89718,2026-08-26,Claude desktop app: private-network browser permission grants don't persist (regression since ~2026-08-20/21),1
+https://github.com/anthropics/claude-code/issues/89901,2026-08-26,claude-fable-5: one-time deploy approval treated as standing permission,0
+https://github.com/anthropics/claude-code/issues/89656,2026-08-25,Browser pane: no way to trust private-network origins — per-action prompts and blocked subresources on LAN-resolving HTTPS sites,0
+https://github.com/anthropics/claude-code/issues/88958,2026-08-23,[BUG] Allowed sites list creates duplicate entries for the same origin,0
+https://github.com/anthropics/claude-code/issues/89016,2026-08-23,[BUG] Claude Desktop (Windows/MSIX): fatal GPU-process crash (exit 101457950 / 0x060C201E) on preview surfaces — --disable-gpu-compositing does NOT mitigate; package left Modified/NeedsRemediation,0
+https://github.com/anthropics/claude-code/issues/88837,2026-08-22,"[MODEL] CRITICAL PERMISSION BYPASS: Claude manufactures its own execution authority from a document it wrote, overrides an explicit in-context user prohibition, and runs unapproved privileged commands",0
+https://github.com/anthropics/claude-code/issues/87337,2026-08-17,"Agent repeatedly extends explicit instructions into unrequested git/GitHub actions (push, PR creation, branch deletion) — even right after writing its own rule against this",0
+https://github.com/anthropics/claude-code/issues/85199,2026-08-09,[BUG]Claude Desktop repeatedly crashes and requires “Advanced Options → Repair” on Windows,2
+https://github.com/anthropics/claude-code/issues/84355,2026-08-06,"Claude-in-Chrome prompts on every browser action — settings.json allow rules, all permission modes, extension approved-sites, AND CLAUDE_CHROME_PERMISSION_MODE all fail (v2.1.220 / ext 1.0.84)",0
+https://github.com/anthropics/claude-code/issues/84514,2026-08-06,Desktop browser: per-site approval cards ignore bypass-permissions mode — add a way to opt out,0
+https://github.com/anthropics/claude-code/issues/83604,2026-08-03,"Cowork: Chrome ""Approved sites"" domain approval resets every new conversation despite choosing ""Always allow""",0
+https://github.com/anthropics/claude-code/issues/82626,2026-07-30,Claude in Chrome MCP bridge refuses localhost/127.0.0.1 navigation while side-panel Claude allows it,4
+https://github.com/anthropics/claude-code/issues/81948,2026-07-28,Scheduled Routines re-prompt for already-allowed permissions.allow actions on every run,0
+https://github.com/anthropics/claude-code/issues/80764,2026-07-24,"Planning-seat Claude enforces workflow documents it never read — mounted in its own environment, one tool call away, addressed to it by name",0
+https://github.com/anthropics/claude-code/issues/79096,2026-07-19,[FEATURE] Resume a self-filed GitHub issue's checklist as the session's task list,0
+https://github.com/anthropics/claude-code/issues/79110,2026-07-19,"[BUG] Desktop app Browser pane: read tools blocked with ""requires per-action approval"" even though domain is in launchPreviewAllowedOrigins, restart does not clear it",3
+https://github.com/anthropics/claude-code/issues/78315,2026-07-17,"Browser tool ""read tools"" per-action approval doesn't respect launchPreviewAllowedOrigins / ""Allowed sites"" list",1
+https://github.com/anthropics/claude-code/issues/78142,2026-07-16,"[BUG] Browser pane read tools (screenshot/read_page) permanently blocked — ""per-action approval"" required but approval card never appears (Auto mode, allowlisted site)",3
+https://github.com/anthropics/claude-code/issues/74696,2026-07-06,[BUG] Claude in Chrome extension blocks navigation to all domains except one specific site (behaves like an allowlist),7
+https://github.com/anthropics/claude-code/issues/74715,2026-07-06,"""Always allow"" for Claude-in-Chrome site permissions is always persisted as duration:""once"" — approved sites list stays empty, prompt repeats for every browser action",15
+https://github.com/anthropics/claude-code/issues/71789,2026-06-27,"Claude in Chrome: ""Always allow actions on this site"" never persists - every action re-prompts",0
+https://github.com/anthropics/claude-code/issues/71790,2026-06-27,"BROKEN: ""Always allow actions on this site"" does NOTHING - Claude in Chrome re-prompts on every single action",0
+https://github.com/anthropics/claude-code/issues/71811,2026-06-27,[FEATURE] Let agents/skills set the conversation title and file it into a folder/Project,0
+https://github.com/anthropics/claude-code/issues/71422,2026-06-25,[Bug] Plan mode skips ExitPlanMode and requests per-action approval instead of bulk approval,0
+https://github.com/anthropics/claude-code/issues/67020,2026-06-10,[BUG] Claude in Chrome v1.0.75: 'Always allow' for browser actions not honored — re-prompts on every action (~300/session),1
+https://github.com/anthropics/claude-code/issues/66307,2026-06-08,Claude in Chrome (MCP): navigate/javascript_tool denied 'Permission denied by user' with no approval popup; approved-sites list can't be populated — survives reinstall + reconnect,2
+https://github.com/anthropics/claude-code/issues/66125,2026-06-07,Claude for Chrome extension: add global 'always allow all actions' setting to bypass per-site permission dialogs,0
+https://github.com/anthropics/claude-code/issues/64212,2026-05-31,"[MODEL] Opus 4.8 (xhigh): claims work verified when it isn't, self-contradicts, and over-parallelizes contradictory tool calls — on a low-complexity codebase",0
+https://github.com/anthropics/claude-code/issues/63667,2026-05-29,Versioned install path causes TCC re-prompts on every Claude Code update (breaks MDM PPPC; CoWork scheduled actions may be affected),0
+https://github.com/anthropics/claude-code/issues/63671,2026-05-29,Versioned install path causes TCC re-prompts on every Claude Code update (breaks MDM PPPC; CoWork scheduled actions may be affected),2
+https://github.com/anthropics/claude-code/issues/60818,2026-05-20,Model carries imperative actions from earlier system-reminder payloads past an explicit plan-scope narrowing,0
+https://github.com/anthropics/claude-code/issues/59974,2026-05-17,"[BUG] Claude in Chrome — ""blocked by your organization's policy"" on all sites (personal Ubuntu machine, no managed policies)",3
+https://github.com/anthropics/claude-code/issues/59049,2026-05-14,Claude in Chrome: set.or.th (Stock Exchange of Thailand official website) blocked by safety API,8
+https://github.com/anthropics/claude-code/issues/58079,2026-05-11,"Claude Code commits and pushes without permission, ignoring explicit CLAUDE.md prohibitions",0
+https://github.com/anthropics/claude-code/issues/56965,2026-05-07,"Claude in Chrome v1.0.70: `permission_required` regression continues from #53630 — approval popup never renders, all MCP navigations blocked",5
+https://github.com/anthropics/claude-code/issues/55580,2026-05-02,[FEATURE] User-controlled allowlist override for server-side domain blocks (Claude in Chrome),3
+https://github.com/anthropics/claude-code/issues/53830,2026-04-27,Auto-mode wrote a permissions allow-list entry for ssh-to-prod without per-action user approval,0
+https://github.com/anthropics/claude-code/issues/51040,2026-04-20,"Claude.ai Google Drive/Gmail/Calendar MCP integrations lack write operations (move, rename, delete/trash)",0
+https://github.com/anthropics/claude-code/issues/50606,2026-04-19,"[BUG] Claude for Chrome MCP tools return ""Navigation to this domain is not allowed"" for ALL domains (v1.0.66+ regression)",5
+https://github.com/anthropics/claude-code/issues/50457,2026-04-18,[BUG]Cowork agentic capability collapse — per-action approval dispatcher broken on all browser MCP tools,0
+https://github.com/anthropics/claude-code/issues/49979,2026-04-17,[BUG] Claude in Chrome MCP: navigate and read_page denied on ALL domains from Claude Desktop (Windows 11) — no approval popup renders,4
+https://github.com/anthropics/claude-code/issues/49149,2026-04-16,Permission mode naming is confusing: 'Ask permissions' vs 'Accept edits',0
+https://github.com/anthropics/claude-code/issues/48295,2026-04-15,Claude in Chrome: URL categorization API blocks legitimate ticket/athletics sites (false positives),14
+https://github.com/anthropics/claude-code/issues/43670,2026-04-04,[MODEL] Opus 4.6 (Sonnet 4.6 in this case),0
+https://github.com/anthropics/claude-code/issues/42428,2026-04-02,Desktop App: permission prompts still appear despite bypass permissions mode enabled,0
+https://github.com/anthropics/claude-code/issues/41034,2026-03-30,[BUG] Bug: Claude in Chrome — all sites blocked in Cowork mode (was working previously),9
+https://github.com/anthropics/claude-code/issues/38378,2026-03-24,Feature: Allow whitelisting sites (including localhost) in Claude in Chrome extension,0
+https://github.com/anthropics/claude-code/issues/37839,2026-03-23,Sandbox permission prompts are excessive and unavoidable for common development patterns,0
+https://github.com/anthropics/claude-code/issues/33906,2026-03-13,"[Bug] Claude says it is going to do research and start working, but instead stops with stop_reason:tool_use and does nothing",0
+https://github.com/anthropics/claude-code/issues/29938,2026-03-02,[Bug] Claude extension remains disabled in Chrome despite enabling in settings and extension manager,0
+https://github.com/anthropics/claude-code/issues/26779,2026-02-19,[Security] Chrome extension site permissions can be bypassed via direct LevelDB write,1
+https://github.com/anthropics/claude-code/issues/26397,2026-02-17,Complaint: Repeated violation of user-configured directives causing excessive token consumption,0
+https://github.com/anthropics/claude-code/issues/22983,2026-02-04,Claude in Chrome: browser extension not connected despite all processes and bridge pipe running (Windows),0
+https://github.com/anthropics/claude-code/issues/22576,2026-02-02,[BUG] File permission approval not persisting within session or across sessions,0
+https://github.com/anthropics/claude-code/issues/20298,2026-01-23,Claude in Chrome browser extension not connecting to Claude Code CLI,1

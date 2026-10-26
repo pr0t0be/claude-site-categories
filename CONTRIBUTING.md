@@ -31,7 +31,7 @@ Open an issue with the "Report a site category" template and fill in domain, cat
    - `source`: a URL, or `evidence/<file>` for your screenshot.
    - `notes`: free text in double quotes if it contains commas.
 2. If you have a Response-tab screenshot, put it in `evidence/` as `domain_category_YYYY-MM-DD.webp` (or `.png`). Check it does not show the Headers tab or any token.
-3. Run `python validate.py`. It checks the CSV and regenerates the tables in `README.md` and `README.en.md`. Commit the CSV, the evidence file and both README files together.
+3. Run `python validate.py`. It checks the CSV and regenerates the tables in `README.md` (English) and `README.ru.md` (Russian). Commit the CSV, the evidence file and both README files together.
 4. A new observation of a domain already in the list is a new row, not an edit of the old one.
 
 CI runs `python validate.py --check` on every pull request.
@@ -65,7 +65,7 @@ CI runs `python validate.py --check` on every pull request.
    - `source`: ссылка, либо `evidence/<файл>` для вашего скриншота.
    - `notes`: свободный текст, в двойных кавычках, если есть запятые.
 2. Скриншот вкладки Response положите в `evidence/` с именем `домен_категория_ГГГГ-ММ-ДД.webp` (или `.png`). Проверьте, что на нём нет вкладки Headers и токена.
-3. Запустите `python validate.py`. Скрипт проверит CSV и пересоберёт таблицы в `README.md` и `README.en.md`. Коммитьте CSV, файл из `evidence/` и оба README вместе.
+3. Запустите `python validate.py`. Скрипт проверит CSV и пересоберёт таблицы в `README.md` и `README.ru.md`. Коммитьте CSV, файл из `evidence/` и оба README вместе.
 4. Новое наблюдение домена, который уже есть в списке, это новая строка, а не правка старой.
 
 CI запускает `python validate.py --check` на каждом pull request.
