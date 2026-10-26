@@ -34,7 +34,7 @@
 ## Реестр
 
 <!-- registry:start -->
-_9 entries (category0: 2, category3: 7). Generated from registry.csv by validate.py, do not edit by hand._
+_8 entries (category0: 2, category3: 6). Generated from registry.csv by validate.py, do not edit by hand._
 
 | domain | category | checked_at | method | reporter | source | notes |
 |---|---|---|---|---|---|---|
@@ -43,7 +43,6 @@ _9 entries (category0: 2, category3: 7). Generated from registry.csv by validate
 | dev.vk.com | category3 | 2026-09-16 | third_party_report | anthropics/claude-code#94880 | [github.com/anthropics/claude-code/issues/94880](https://github.com/anthropics/claude-code/issues/94880) | Issue author: site-level permissions unavailable, no way to grant them; category inferred from the dialog, not from a server response |
 | docs.avito.ru | category3 | 2026-10-02 | third_party_report | anthropics/claude-code#99007 | [github.com/anthropics/claude-code/issues/99007](https://github.com/anthropics/claude-code/issues/99007) | Issue author's conclusion from the extension code path (category3 from url_hash_check); no screenshot of the response |
 | facebook.com | category3 | 2026-06-20 | third_party_report | abrahamjeyaraj.com | [www.abrahamjeyaraj.com/articles/claude-chrome-facebook-pe...](https://www.abrahamjeyaraj.com/articles/claude-chrome-facebook-permission-wall) | Blog post: permission prompt on every action, site-level permissions disabled; category inferred from the dialog |
-| habr.com | category3 | 2026-10-26 | dialog_observed | pr0t0be | self-report (registry author; navigate-to dialog) | Dialog 'Claude wants to navigate to: habr.com' had no Always allow button and said Site-level permissions are disabled for this site; extension version not recorded |
 | redash.k.avito.ru | category3 | 2026-10-02 | third_party_report | anthropics/claude-code#99007 | [github.com/anthropics/claude-code/issues/99007](https://github.com/anthropics/claude-code/issues/99007) | Issue author's conclusion from the extension code path (category3 from url_hash_check); no screenshot of the response |
 | stash.msk.avito.ru | category3 | 2026-10-02 | third_party_report | anthropics/claude-code#99007 | [github.com/anthropics/claude-code/issues/99007](https://github.com/anthropics/claude-code/issues/99007) | Issue author's conclusion from the extension code path (category3 from url_hash_check); no screenshot of the response |
 | www.avito.ru | category3 | 2026-10-25 | devtools_response | pr0t0be | [www.avito.ru_category3_2026-10-25.webp](evidence/www.avito.ru_category3_2026-10-25.webp) | Response tab of url_hash_check in the extension service worker DevTools; org_policy null, policy_source null; extension 1.0.102 |
